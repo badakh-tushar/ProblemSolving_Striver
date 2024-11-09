@@ -1,3 +1,5 @@
 ﻿using ProblemSolving_Striver;
 
-Pattern.PatterMain();
+//Pattern.PatterMain();
+//MathBasic.MathMain();
+Recursion.RecursionMain();
