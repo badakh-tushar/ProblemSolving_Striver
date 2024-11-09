@@ -249,7 +249,20 @@ namespace ProblemSolving_Striver
             }
         }
 
+        public static void pattern9()
+        {
+            //4444444
+            //4333334
+            //4322234
+            //4321234
+            //4322234
+            //4444444
 
+            // n will be given as 4
+
+            int n = 4;
+            // check on youtube striver vedio 6 last part
+        }
     }
 }
  
