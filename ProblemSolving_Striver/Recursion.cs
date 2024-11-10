@@ -23,7 +23,8 @@ namespace ProblemSolving_Striver
             //    int[] ints = new int[] { 1, 2, 3, 4, 5 };
             //    reverseArray(0, ints, 5);
             //    foreach (int i in ints) { Console.WriteLine(i); }
-            Console.WriteLine(CheckPallindrom("madam", 0, 5));
+            //Console.WriteLine(CheckPallindrom("madam", 0, 5));
+            fibonacci(10, 0, 1);
         }
         public static void recursion(int count)
         {
@@ -110,6 +111,18 @@ namespace ProblemSolving_Striver
                 return false;
             return CheckPallindrom(str, i + 1, n);
 
+        }
+
+        public static void fibonacci(int count,int sum1 , int sum2)
+        {
+            // 0,1,1,2,3,5,8,13,21,34,55....
+            if(count == 0) return;
+            count--;
+            Console.Write(" " + sum2);
+            int tmp = sum2;
+            sum2 = sum1 + sum2;
+            sum1 = tmp;
+            fibonacci(count, sum1, sum2);
         }
     }
 }
