@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,15 @@ namespace ProblemSolving_Striver
             //recursion(count);
             //pattern(5, 0);
             //PrintOnetoN(10);
-            SumNnumbers(3, 0);
+            //SumNnumbers(3, 0);
+            //int sum=SumNnmubersMethod2(3);
+            //Console.WriteLine(sum);
+            //int fact = Factorial(5);
+            //Console.WriteLine(fact);
+            //    int[] ints = new int[] { 1, 2, 3, 4, 5 };
+            //    reverseArray(0, ints, 5);
+            //    foreach (int i in ints) { Console.WriteLine(i); }
+            Console.WriteLine(CheckPallindrom("madam", 0, 5));
         }
         public static void recursion(int count)
         {
@@ -67,6 +76,40 @@ namespace ProblemSolving_Striver
             }
             sum = sum + n;
             SumNnumbers(n-1, sum);
+        }
+
+        public static int SumNnmubersMethod2(int n)
+        {
+            if (n == 0) return 0;
+           return n + SumNnmubersMethod2(n - 1);
+        }
+
+        public static int Factorial(int n)
+        {
+            if (n == 1) return 1;
+            return n * Factorial(n - 1);
+            // time complexity is O(N)
+        }
+
+        public static void reverseArray(int i , int[] arr , int n )
+        {
+            if (i > n / 2) return;
+            int temp = arr[i];
+            arr[i] = arr[n - i - 1];
+            arr[n - i - 1] = temp;
+            i++;
+            reverseArray(i , arr , n );
+
+        }
+
+        public static bool  CheckPallindrom(string str,int i,int n)
+        {
+            if (i > n / 2) 
+                return true; 
+            if (str[i] != str[n - i - 1]) 
+                return false;
+            return CheckPallindrom(str, i + 1, n);
+
         }
     }
 }
