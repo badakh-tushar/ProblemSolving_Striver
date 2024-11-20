@@ -19,7 +19,8 @@ namespace ProblemSolving_Striver
             // MissingNumber();
             //MaxmConsequetiveOnes();
             //LongestSubarrayWithSumK();
-            LongestSubArraySumApproach2();
+            // LongestSubArraySumApproach2();
+            SortZerOneTwo();
         }
         public static void SecondLargestElementArray()
         {
@@ -192,28 +193,29 @@ namespace ProblemSolving_Striver
             int currentSum = 0;
             foreach (int ele in nums)
             {
-                    currentSum += ele;
+                currentSum += ele;
             }
-            int missingele = sum -currentSum;
+            int missingele = sum - currentSum;
             Console.WriteLine(missingele);
         }
 
         public static void MaxmConsequetiveOnes()
         {
-            int[] arr = new int[] { 1, 1, 0, 1, 1, 1, 1,1,1,1,1, 0, 0, 1, 1, 1, 1, 1, 1, 0 };
-            int count = 0, maxCount = 0 ;
-            for(int i = 0; i < arr.Length; i++)
+            int[] arr = new int[] { 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0 };
+            int count = 0, maxCount = 0;
+            for (int i = 0; i < arr.Length; i++)
             {
-                if (arr[i] == 1) {
+                if (arr[i] == 1)
+                {
                     count++;
                 }
                 else
                 {
                     if (count > maxCount) maxCount = count;
-                    count = 0 ;
+                    count = 0;
                 }
             }
-            if(count>maxCount) Console.WriteLine("Max Count ofone's" + count);
+            if (count > maxCount) Console.WriteLine("Max Count ofone's" + count);
             Console.WriteLine("Max Count ofone's" + maxCount);
         }
 
@@ -244,7 +246,7 @@ namespace ProblemSolving_Striver
             for (int i = 0; i < arr.Length; i++)
             {
                 sum = sum + arr[i];
-                if(!cummulativeSum.ContainsKey(sum)) 
+                if (!cummulativeSum.ContainsKey(sum))
                     cummulativeSum.Add(sum, i);
             }
             if (cummulativeSum.ContainsKey(k)) lengthMax = cummulativeSum[k] + 1;
@@ -309,29 +311,91 @@ namespace ProblemSolving_Striver
             int left = 0, right = 1;
             int sum = 0; int length = 0; int lengthMax = 0; int k = 9;
             sum = sum + arr[left];
-            while (left <= right && right < arr.Length-1)
+            while (left <= right && right < arr.Length - 1)
             {
-                if(sum == k)
+                if (sum == k)
                 {
                     length = right - left;
-                    if(length>lengthMax) lengthMax= length;
+                    if (length > lengthMax) lengthMax = length;
                     right++;
                 }
-                if(sum < k)
+                if (sum < k)
                 {
-                    
+
                     sum += arr[right];
                     right++;
                 }
                 else
                 {
-                   
-                    sum-= arr[left];
+
+                    sum -= arr[left];
                     left++;
                 }
             }
-            Console.WriteLine("Maxm Length is "+lengthMax);
+            Console.WriteLine("Maxm Length is " + lengthMax);
 
         }
+        public static void TwoSumProblem()
+        {
+            int[] arr = new int[] { 2, 6, 5, 8, 11 };
+            int sum = 14;
+            // use hashing store numbers after checking diffrence is there or not
+            // second approach is to sort and use two pointers
+            for (int i = 0; i < arr.Length; i++)
+            {
+
+            }
+        }
+        public static void SortZeroOne()
+        {
+            int[] arr = new int[] { 0, 1, 1, 0, 0, 0, 1, 1, 1, 0 };
+            // just swap bro skip if its zero at first and swap with one
+            // use to pointers from left and right
+
+        }
+        public static void SortZerOneTwo()
+        {
+            int[] arr = new int[] { 0, 1, 1, 2, 2, 2, 0, 0, 0, 1, 2, 2, 1, 0, 1 };
+            int z = 0, o = 0, t = 0;
+            int left = 0, right = arr.Length-1;
+
+            while (left < right)
+            {
+                if(arr[left] == 1 && arr[right]==0 || arr[left] ==2 && arr[right] == 0)
+                {
+                    int temp = arr[left];
+                    arr[left]= arr[right];
+                    arr[right]= temp;
+                    left++;
+                    right--;
+                    continue;
+                }
+                else if(arr[left] == 0 )
+                {
+                    left++;
+                }
+                right--;
+            }
+            right=arr.Length-1;
+            while (left < right)
+            {
+                if (arr[left] == 2 && arr[right] == 1 )
+                {
+                    int temp = arr[left];
+                    arr[left] = arr[right];
+                    arr[right] = temp;
+                    left++;
+                    right--;
+                    continue;
+                }
+                else if (arr[left] == 1 )
+                {
+                    left++;
+                }
+                right--;
+            }
+
+            foreach( int i in arr ) Console.Write( i + ",");
+        }
     }
-}
+    }
