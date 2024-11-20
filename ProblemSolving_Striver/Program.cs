@@ -2,4 +2,6 @@
 
 //Pattern.PatterMain();
 //MathBasic.MathMain();
-Recursion.RecursionMain();
+//Recursion.RecursionMain();
+//Sorting.SortMain();
+ArrayDsa.ArrayDsaMain();
