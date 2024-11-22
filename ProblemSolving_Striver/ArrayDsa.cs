@@ -20,7 +20,9 @@ namespace ProblemSolving_Striver
             //MaxmConsequetiveOnes();
             //LongestSubarrayWithSumK();
             // LongestSubArraySumApproach2();
-            SortZerOneTwo();
+            //SortZerOneTwo();
+            //MajorityElement();
+            MaximumSubArraySum();
         }
         public static void SecondLargestElementArray()
         {
@@ -357,29 +359,11 @@ namespace ProblemSolving_Striver
         {
             int[] arr = new int[] { 0, 1, 1, 2, 2, 2, 0, 0, 0, 1, 2, 2, 1, 0, 1 };
             int z = 0, o = 0, t = 0;
-            int left = 0, right = arr.Length-1;
+            int left = 0, right = arr.Length - 1;
 
             while (left < right)
             {
-                if(arr[left] == 1 && arr[right]==0 || arr[left] ==2 && arr[right] == 0)
-                {
-                    int temp = arr[left];
-                    arr[left]= arr[right];
-                    arr[right]= temp;
-                    left++;
-                    right--;
-                    continue;
-                }
-                else if(arr[left] == 0 )
-                {
-                    left++;
-                }
-                right--;
-            }
-            right=arr.Length-1;
-            while (left < right)
-            {
-                if (arr[left] == 2 && arr[right] == 1 )
+                if (arr[left] == 1 && arr[right] == 0 || arr[left] == 2 && arr[right] == 0)
                 {
                     int temp = arr[left];
                     arr[left] = arr[right];
@@ -388,14 +372,100 @@ namespace ProblemSolving_Striver
                     right--;
                     continue;
                 }
-                else if (arr[left] == 1 )
+                else if (arr[left] == 0)
+                {
+                    left++;
+                }
+                right--;
+            }
+            right = arr.Length - 1;
+            while (left < right)
+            {
+                if (arr[left] == 2 && arr[right] == 1)
+                {
+                    int temp = arr[left];
+                    arr[left] = arr[right];
+                    arr[right] = temp;
+                    left++;
+                    right--;
+                    continue;
+                }
+                else if (arr[left] == 1)
                 {
                     left++;
                 }
                 right--;
             }
 
-            foreach( int i in arr ) Console.Write( i + ",");
+            foreach (int i in arr) Console.Write(i + ",");
+
+            // check other solutions on GFG
+            // one solution involves counting 0 1 2 and then population them in array
+            // Ducth national flag algo tries sorting just like above but in one go 
+            // by only tracking low mid and high and sorting low mid in if arr[mid] ==0
+            // else if arr[mid] ==1 then mid ++
+            // and in lese that is if arr[mid] is 2 then swap with mid and high
+        }
+
+        public static void MajorityElement()
+        {
+            // find a element which appears greater than N/2 times in an array
+            // note it is more than N/2 not equall
+
+            int[] arr = new int[] { 2, 2, 3, 3, 1, 2, 2 };
+            // use hashing for better solution
+
+            // optimal solution Moore's Voting Algo
+
+            // we need to understand the thought process and intution behind the algo
+            int count = 0; int ele = arr[0];
+            for( int i=0;i<arr.Length; i++ )
+            {
+                if (count == 0)
+                {
+                    ele = arr[i];
+                    count = 1;
+                }
+                else if (ele == arr[i]) count++;
+                else count--;
+            }
+            int count1 = 0;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (ele == arr[i]) count1++;
+            }
+            if (count1 > arr.Length / 2)
+            {
+                Console.WriteLine("Am majority " + ele);
+
+            }
+            else
+            {
+                Console.WriteLine("No one in majority");
+            }
+        }
+
+        public static void MaximumSubArraySum()
+        {
+            int[] arr = new int[] { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
+            // -2,1,-2,2,1,3,4,-1,3
+            // here this is my solution here i have done a cummulative summations of 
+            // all the elements and whichver is the longest sequence of positive numbers gives me 
+            // longest sequence of the maximum sub array go and sum it
+
+            // optimal solution is kadane's algo
+
+            // here the simple idea is to make the sum zero whenever it becomes neagative 
+            int sum = 0 ; int sumMax = 0; bool flag = true;
+            for (int i = 0;i<arr.Length;i++)
+            {
+                sum += arr[i];
+                if (sum > sumMax) sumMax = sum;
+                if(sum <0) sum = 0;
+            }
+            Console.WriteLine(sumMax);
         }
     }
+
+    
     }
