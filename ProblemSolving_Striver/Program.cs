@@ -4,4 +4,5 @@
 //MathBasic.MathMain();
 //Recursion.RecursionMain();
 //Sorting.SortMain();
-ArrayDsa.ArrayDsaMain();
+//ArrayDsa.ArrayDsaMain();
+BinarySearch.BinarySearchMain();

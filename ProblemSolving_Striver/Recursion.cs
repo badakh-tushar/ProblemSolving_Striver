@@ -24,7 +24,9 @@ namespace ProblemSolving_Striver
             //    reverseArray(0, ints, 5);
             //    foreach (int i in ints) { Console.WriteLine(i); }
             //Console.WriteLine(CheckPallindrom("madam", 0, 5));
-            fibonacci(10, 0, 1);
+            // fibonacci(10, 0, 1);
+            int N = 4;
+            Console.WriteLine(" Ans "+fibonacciTwo(N));
         }
         public static void recursion(int count)
         {
@@ -123,6 +125,18 @@ namespace ProblemSolving_Striver
             sum2 = sum1 + sum2;
             sum1 = tmp;
             fibonacci(count, sum1, sum2);
+        }
+        public static int fibonacciTwo(int N)
+        {
+            Console.WriteLine($" f("+N+") ");
+            if (N <= 1) return N;
+            int last = fibonacciTwo(N - 1);
+            Console.Write(" last " + last);
+            int slast = fibonacciTwo(N - 2);
+            Console.WriteLine(" ");
+            Console.Write(" slast " + slast);
+
+            return last + slast;
         }
     }
 }
