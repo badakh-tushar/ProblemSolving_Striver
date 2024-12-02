@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,8 +16,11 @@ namespace ProblemSolving_Striver
             //int Index = RecursionBinarySearch(arr,0,arr.Length-1,1);
             //Console.WriteLine(" Index is " + Index);
             //LowerBoundBinarySearch();
-            UpperBoundBinarySearch();
+            //UpperBoundBinarySearch();
             //SearchInsertIndex();
+            //FindPivotRotatedArray();
+            //SearchInRotatedSortedArray();
+            MinimumElementSortedArray();
         }
 
         public static int RecursionBinarySearch(int[] arr, int left, int right,int toFind)
@@ -126,6 +131,151 @@ namespace ProblemSolving_Striver
             // just find lower bound for first occurance and upperbound -1 for last occurance
             // also check if the number given by lower and upper bound algo check if it equall
             // to to find number
+        }
+
+        public static void FindPivotRotatedArray() // or find Peak Element
+        {
+            int[] arr = new int[] {  1,2,3,4,5,6 };
+
+            //int left=0,right=arr.Length - 1;
+            //while (left <= right)
+            //{
+            //    int mid= (left + right) / 2;
+            //    if (arr[mid] > arr[mid-1] && arr[mid] > arr[mid +1])
+            //    {
+            //        Console.WriteLine(mid);
+            //        break;
+            //    }
+            //    else if (arr[mid] < arr[left] && arr[mid] < arr[right])
+            //    {
+            //        right = mid - 1;
+            //    }
+            //    else
+            //    {
+            //        left = left + 1;
+            //    }
+            //}
+            //int[] arr = new int[] { 6, 7, 8, 9, 1, 2, 3, 4, 5 };
+
+            // this is excellant question do it twice.
+            int left = 0, right = arr.Length - 1;
+
+            while (left <= right)
+            {
+                int mid = left + (right - left) / 2;
+
+                // Check if mid is the pivot
+                if (mid < right && arr[mid] > arr[mid + 1])
+                {
+                    Console.WriteLine($"Pivot index: {mid}");
+                    return;
+                }
+                if (mid > left && arr[mid] < arr[mid - 1])
+                {
+                    Console.WriteLine($"Pivot index: {mid - 1}");
+                    return;
+                }
+
+                // Decide the side to search
+                if (arr[mid] >= arr[left])
+                {
+                    left = mid + 1;
+                }
+                else
+                {
+                    right = mid - 1;
+                }
+            }
+
+            Console.WriteLine("Pivot not found");
+        }
+        public static void SearchInRotatedSortedArray()
+        {
+            int[] arr = new int[] { 4, 5, 6, 7, 0, 1, 2 };
+            int k = 1;
+            int left = 0, right = arr.Length - 1;
+            while (left <= right)
+            {
+                int mid = left + (right - left) / 2;
+                if (arr[mid] == k)
+                {
+                    Console.WriteLine($"Elemenet found at {mid} ");
+                    break;
+                }
+                if (arr[left] == k)
+                {
+                    Console.WriteLine($"Elemenet found at {left} ");
+                    break;
+                }
+                if (arr[right] == k)
+                {
+                    Console.WriteLine($"Elemenet found at {right} ");
+                    break;
+                }
+                if (arr[left] < arr[mid])
+                {
+                    // comare k with right most elem
+                    if (arr[left] < k && k < arr[mid])
+                    {
+                        right = mid - 1;
+                    }
+                    else
+                    {
+                        left = mid + 1;
+                    }
+                }
+                else
+                {
+                    if (k < arr[right] && arr[mid]<k)
+                    {
+                        left = mid + 1;
+                    }
+                    else
+                    {
+                        right = mid - 1;
+                    }
+                }
+
+            }
+
+           
+        }
+        public static void SearchInRotatedSortedArrayWithDuplicates()
+        {
+            // [3,1,2,3,3,3,3]
+            //in this case we might not b ablet to find the sorted half
+            // so what we will do is once we get array of left mid and right element as same
+            // then we trim the array and keep on doing it until we get to know sorted half
+            // like do left++ right-- and see of sorted half condition satifies
+            // one more thing we just have to return the if the target element exixt or not
+            // not the index of target element
+        }
+        public static void MinimumElementSortedArray()
+        {
+            //int[] arr = new int[] { 4, 5,6, 1, 2,3};
+            //int[] arr = [2,1];
+            int[] arr = [1,2];
+            int left = 0, right = arr.Length - 1, mid = 0; ;
+            while (left <= right)
+            {
+                 mid = (left + right) / 2;
+               
+                if (mid != 0 && arr[mid] < arr[mid - 1]   )
+                {
+                    Console.WriteLine(mid);
+                    break;
+                }
+
+                if (arr[mid] >= arr[left] && arr[mid] >= arr[right])
+                {
+                    left = mid + 1;
+                }
+                else
+                {
+                    right = mid;
+                }
+            }
+            Console.WriteLine( arr[mid]);
         }
     }
 }
