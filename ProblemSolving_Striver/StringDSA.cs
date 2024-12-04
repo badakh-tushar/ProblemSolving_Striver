@@ -13,7 +13,8 @@ namespace ProblemSolving_Striver
             //RemoveOutermostParenthesis();
             //Console.WriteLine(ReverseWords("the sky is blue"));
             //LargestOddString();
-            LongestCommonPrefix();
+            //LongestCommonPrefix();
+            RotateString();
         }
         public static void RemoveOutermostParenthesis()
         {
@@ -128,6 +129,59 @@ namespace ProblemSolving_Striver
             }
             
             Console.WriteLine(ans.ToString());
+        }
+        public static void Isomorphic(string s, string s2)
+        {
+            // i have checked solution GFG and it is easy try to recall by your own
+        }
+
+        public static void RotateString()
+        {
+            // just do the concatnation and search for goal in it 
+
+            //string s = "abcde";
+            string s = "defdefdefabcabc";
+            // string goal = "cdeab";
+            string goal = "defdefabcabcdef";
+            int commonIndex = 0;
+            if (s.Length == goal.Length)
+            {
+                for (int i = 0; i < s.Length; i++)
+                {
+                    if (s[0].Equals(goal[i]))
+                    {
+                        commonIndex = i;
+                        // should start from last goal same index
+                    }
+
+                }
+                int limit = commonIndex + s.Length;
+                int j = 0;
+                int k= commonIndex;
+                while (commonIndex <limit )
+                {
+
+                    if (s[j] == goal[k])
+                    {
+                        j++;
+                        k++;
+                        if (k < goal.Length)
+                        {
+                            commonIndex++;
+                        }
+                        else
+                        {
+                            k = 0;
+                            commonIndex++;
+                        }
+                    }else
+                    {
+                        Console.WriteLine("False");
+                        break;
+                    }
+                }
+                Console.Write("True");
+            }
         }
     }
 }
